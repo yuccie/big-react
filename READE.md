@@ -1,4 +1,4 @@
-## 初始化项目
+## 1、初始化项目
 
 使用 pnpm 初始化项目，相比于 npm、yarn 可以解决很多幽灵依赖（没有声明，但安装）的问题
 
@@ -53,3 +53,12 @@ eslint 本身可以做风格检查，为了防止与prettier冲突 ，可以将p
 * eslint-plugin-prettier：用Prettier来接管修复代码即eslint --fix
 
 [打包工具对比](https://bundlers.tooling.report/)
+
+## 2、实现JSX
+
+React项目结构：
+
+* react（宿主环境无关的公用方法，比如createElement）
+* react-reconciler（协调器的实现，宿主环境无关，核心所及所在）
+* 各种宿主环境的包（比如浏览器环境react-dom，还有其他）
+* shared（公用辅助方法，宿主环境无关）
