@@ -51,3 +51,5 @@ eslint 本身可以做风格检查，为了防止与prettier冲突 ，可以将p
 
 * eslint-config-prettier：覆盖ESLint本身的规则配置
 * eslint-plugin-prettier：用Prettier来接管修复代码即eslint --fix
+
+[打包工具对比](https://bundlers.tooling.report/)
