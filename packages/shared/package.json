@@ -1,0 +1,8 @@
+{
+  "name": "shared",
+  "version": "1.0.0",
+  "description": "该模块不需要导出，所有其他模块可以共用这个模块",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

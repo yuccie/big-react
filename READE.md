@@ -62,3 +62,27 @@ React项目结构：
 * react-reconciler（协调器的实现，宿主环境无关，核心所及所在）
 * 各种宿主环境的包（比如浏览器环境react-dom，还有其他）
 * shared（公用辅助方法，宿主环境无关）
+
+
+```js
+<div>hello</div>
+
+// babel转义后  此时 react runtime 是 automatic模式，在react 17之后，都是转为 jsx，如下
+import { jsx as _jsx } from "react/jsx-runtime";
+/*#__PURE__*/_jsx("div", {
+  children: "hello"
+});
+
+// 在react 17之前，都是转义的下面
+/*#__PURE__*/React.createElement("div", null, "hello");
+```
+
+包括两部分：
+- 编译时
+- 运行时：jsx方法或React.createElement方法的实现（包括dev、prod两个环境）
+
+编译时由babel编译实现，我们来实现运行时，工作量包括：
+
+1. 实现jsx方法
+2. 实现打包流程
+3. 实现调试打包结果的环境
