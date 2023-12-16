@@ -86,3 +86,11 @@ import { jsx as _jsx } from "react/jsx-runtime";
 1. 实现jsx方法
 2. 实现打包流程
 3. 实现调试打包结果的环境
+
+
+在mono-repo仓库中，如果依赖了当前仓库的文件，写法如下
+```json
+	"dependencies": {
+		"shared": "workspace:*"
+	},
+```
