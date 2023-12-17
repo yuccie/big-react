@@ -94,3 +94,9 @@ import { jsx as _jsx } from "react/jsx-runtime";
 		"shared": "workspace:*"
 	},
 ```
+
+## 3、实现jsx的打包
+
+ >RollupError: Node tried to load your configuration file as CommonJS even though it is likely an ES module. To resolve this, change the extension of your configuration to ".mjs", set "type": "module" in your package.json file or pass the "--bundleConfigAsCjs" flag.
+
+在打包时，配置文件都是ejs模式，而rollup默认加载配置的方式的cjs，因此需要添加特殊标识 `--bundleConfigAsCjs`，或者其他的方式，上面注释有
