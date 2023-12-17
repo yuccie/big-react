@@ -85,5 +85,35 @@ export const jsx = (type: ElementType, config: any, ...maybeChildren: any) => {
 	return ReactElement(type, key, ref, props);
 };
 
-// 其实还可以封装 jsxDEV，从而在开发环境做更多的事情。
-export const jsxDEV = jsx;
+
+// 其实还可以封装 jsxDEV，从而在开发环境做更多的事情。与jsx的逻辑不同
+export const jsxDEV = (type: ElementType, config: any) => {
+	let key: Key = null;
+	let ref: Ref = null;
+	const props: Props = {};
+
+	for (const prop in config) {
+		const val = config[prop];
+		// 特殊处理 key，ref ？？？❌
+		if (prop === 'key') {
+			if (val !== undefined) {
+				key = '' + val;
+			}
+			continue;
+		}
+		if (prop === 'ref') {
+			if (val !== undefined) {
+				ref = val;
+			}
+			continue;
+		}
+
+		if ({}.hasOwnProperty.call(config, prop)) {
+			props[prop] = val;
+		}
+	}
+
+	// 将处理过后的数据，传入到 ReactElement函数里，生成对应的节点
+	return ReactElement(type, key, ref, props);
+};
+

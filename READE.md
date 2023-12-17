@@ -106,3 +106,9 @@ import { jsx as _jsx } from "react/jsx-runtime";
 
 
 - rollup-plugin-generate-package-json 自动生成打包产物里的package.json
+
+## 2-3、实现第一种调试方式
+
+进入到指定的目录，比如 `dist/node_modules/react/` 里 使用` pnpm link --global` 将当前react连接到全局，也就是说全局变量下的 react 目前就是  `dist/node_modules/react/`，然后在新建项目，使用` pnpm link react --global`依赖这个
+
+在新起的react demo中，打印React，和一个自定义的jsx，查看结果，然后再使用自己的react，同样打印，会发现不同，这是因为jsx在开发环境使用的jsxDEV。
