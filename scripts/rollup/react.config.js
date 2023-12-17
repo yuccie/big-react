@@ -1,7 +1,10 @@
 import { getPackageJSON, getBaseRollupPlugins, resolvePkgPath } from './utils'
+import generatePackageJSON from 'rollup-plugin-generate-package-json'
+
 const { name, module } = getPackageJSON('react') // 从package.json里得到具体的name、module
 const pkePagth = resolvePkgPath(name)
 const pkgDistPath = resolvePkgPath(name, true)
+
 export default [
     // react
     {
@@ -11,7 +14,16 @@ export default [
             name: 'index.js',
             format: 'umd'
         },
-        plugins: getBaseRollupPlugins(),
+        plugins: [...getBaseRollupPlugins(), generatePackageJSON({
+            inputFolder: pkePagth,
+            outputFolder: pkgDistPath,
+            baseContents: ({ name, description, version }) => ({
+                name,
+                description,
+                version,
+                main: 'index.js' // 导出的是umd规范的包，因此用main字段
+            })
+        })],
     },
     // jsx-runtime
     {
