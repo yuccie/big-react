@@ -85,7 +85,6 @@ export const jsx = (type: ElementType, config: any, ...maybeChildren: any) => {
 	return ReactElement(type, key, ref, props);
 };
 
-
 // 其实还可以封装 jsxDEV，从而在开发环境做更多的事情。与jsx的逻辑不同
 export const jsxDEV = (type: ElementType, config: any) => {
 	let key: Key = null;
@@ -116,4 +115,3 @@ export const jsxDEV = (type: ElementType, config: any) => {
 	// 将处理过后的数据，传入到 ReactElement函数里，生成对应的节点
 	return ReactElement(type, key, ref, props);
 };
-

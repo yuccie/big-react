@@ -112,3 +112,44 @@ import { jsx as _jsx } from "react/jsx-runtime";
 进入到指定的目录，比如 `dist/node_modules/react/` 里 使用` pnpm link --global` 将当前react连接到全局，也就是说全局变量下的 react 目前就是  `dist/node_modules/react/`，然后在新建项目，使用` pnpm link react --global`依赖这个
 
 在新起的react demo中，打印React，和一个自定义的jsx，查看结果，然后再使用自己的react，同样打印，会发现不同，这是因为jsx在开发环境使用的jsxDEV。
+
+使用 pnpm link --global 的缺点就是，每次需要重新打包，然后demo项目需要重新启动，才可以。。。那有没有可以热更的方式呢？
+
+## 3、reconciler 架构
+
+reconciler是React核心逻辑所在的模块，中文名叫协调器。协调（reconcile）就是diff算法的意思。
+
+描述ui的方式：
+- jsx
+- 模版语法
+
+运行时核心模块
+- react中：reconciler
+- vue中：renderer
+
+![状态驱动](/assets/3-reconciler.png)
+
+ReactElement如果作为核心模块操作的数据结构，存在的问题：
+
+- 无法表达节点之间的关系
+- 字段有限，不好拓展（比如：无法表达状态）
+
+所以，需要一种新的数据结构，他的特点：
+
+- 介于ReactElement与真实UI节点之间
+- 能够表达节点之间的关系
+- 方便拓展（不仅作为数据存储单元，也能作为工作单元）
+
+这就是FiberNode（虚拟DOM在React中的实现，而vNode就是虚拟dom在vue中的实现）
+
+当前我们了解的节点类型：
+
+- JSX
+- ReactElement
+- FiberNode
+- DOMElement
+
+
+### reconciler的工作方式
+
+对于同一个节点，比较其ReactElement与fiberNode，生成子fiberNode。并根据比较的结果生成不同标记（插入、删除、移动......），对应不同宿主环境API的执行。
